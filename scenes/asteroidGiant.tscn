@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://2jt8f350ia0t"]
+
+[ext_resource type="Script" uid="uid://xadfehocxf0w" path="res://scripts/asteroid.gd" id="1_rhf8p"]
+[ext_resource type="PackedScene" uid="uid://b1yjix5qksipo" path="res://scenes/asteroid.tscn" id="2_drb2p"]
+[ext_resource type="Texture2D" uid="uid://csayuhhdvkvo0" path="res://assets/spacegame_asset_pack/asteroid_1.png" id="2_ql1sq"]
+
+[node name="AsteroidGiant" type="RigidBody2D" groups=["asteroids", "giant"]]
+mass = 0.001
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("1_rhf8p")
+Asteroid = ExtResource("2_drb2p")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["asteroids"]]
+texture_filter = 1
+position = Vector2(1.19209e-07, 1)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("2_ql1sq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-4, 45, -6, 56, -22, 65, -40, 64, -58, 57, -76, 0, -55, -33, -34, -54, -8, -63, 26, -62, 45, -49, 69, -19, 74, 3, 59, 31)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

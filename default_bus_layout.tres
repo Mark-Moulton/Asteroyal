@@ -1,0 +1,69 @@
+[gd_resource type="AudioBusLayout" load_steps=7 format=3 uid="uid://b8xoyfyu60tdd"]
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_j3pel"]
+resource_name = "Distortion"
+pre_gain = -28.06
+keep_hf_hz = 8442.0
+drive = 0.42
+post_gain = 0.58
+
+[sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_j3pel"]
+resource_name = "Phaser"
+range_min_hz = 1277.16
+range_max_hz = 3274.36
+rate_hz = 4.854
+feedback = 0.8
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
+resource_name = "Reverb"
+room_size = 1.0
+damping = 1.0
+spread = 0.51
+hipass = 0.42
+dry = 0.56
+wet = 0.83
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_j3pel"]
+resource_name = "PitchShift"
+pitch_scale = 6.9
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_g28q7"]
+resource_name = "Reverb"
+damping = 1.0
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_j3pel"]
+resource_name = "Chorus"
+dry = 0.29
+wet = 1.0
+
+[resource]
+bus/1/name = &"Music"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/2/name = &"SFX"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/3/name = &"ThrustSFX"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = -10.0741
+bus/3/send = &"SFX"
+bus/3/effect/0/effect = SubResource("AudioEffectDistortion_j3pel")
+bus/3/effect/0/enabled = false
+bus/3/effect/1/effect = SubResource("AudioEffectPhaser_j3pel")
+bus/3/effect/1/enabled = true
+bus/3/effect/2/effect = SubResource("AudioEffectReverb_j3pel")
+bus/3/effect/2/enabled = false
+bus/3/effect/3/effect = SubResource("AudioEffectPitchShift_j3pel")
+bus/3/effect/3/enabled = false
+bus/3/effect/4/effect = SubResource("AudioEffectReverb_g28q7")
+bus/3/effect/4/enabled = false
+bus/3/effect/5/effect = SubResource("AudioEffectChorus_j3pel")
+bus/3/effect/5/enabled = false

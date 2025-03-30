@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://brdvj8fqmxa8d"]
+
+[ext_resource type="Script" uid="uid://2qwpvkmwylyi" path="res://scripts/gamescript.gd" id="1_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://cvryfi1rq7r1n" path="res://scenes/player_ship.tscn" id="2_gpws7"]
+[ext_resource type="Texture2D" uid="uid://dm7l4rtpnkcaj" path="res://assets/SBS - Seamless Space Backgrounds - Large 1024x1024/Large 1024x1024/Purple Nebula/Purple_Nebula_02-1024x1024.png" id="2_pt6qm"]
+[ext_resource type="PackedScene" uid="uid://os0hutr0j70c" path="res://scenes/asteroidSpawner.tscn" id="5_iywne"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_lbhrr")
+spawn_timer = 2.0
+asteroid_spawner_scene = ExtResource("5_iywne")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2, -5)
+scale = Vector2(3, 3)
+texture = ExtResource("2_pt6qm")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PlayerShip" parent="." instance=ExtResource("2_gpws7")]
+position = Vector2(-83, -92)

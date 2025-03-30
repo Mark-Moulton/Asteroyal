@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://os0hutr0j70c"]
+
+[ext_resource type="Script" uid="uid://6o2gln6dcla4" path="res://scripts/asteroidSpawner.gd" id="1_64gjg"]
+[ext_resource type="PackedScene" uid="uid://2jt8f350ia0t" path="res://scenes/asteroidGiant.tscn" id="2_c0d5r"]
+[ext_resource type="Script" uid="uid://b7t8sllo651ia" path="res://scripts/drawOutline.gd" id="3_c0d5r"]
+
+[node name="AsteroidSpawner" type="Node2D"]
+script = ExtResource("1_64gjg")
+alphaSpeed = 0.25
+radSpeed = 50.0
+Asteroid = ExtResource("2_c0d5r")
+maxRad = 70.0
+
+[node name="Outline" type="Node2D" parent="."]
+script = ExtResource("3_c0d5r")

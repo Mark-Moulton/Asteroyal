@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://g81c5i0g1sni"]
+
+[ext_resource type="Script" uid="uid://8rs1hb6jyqv8" path="res://scripts/bullet.gd" id="1_l5glv"]
+[ext_resource type="Texture2D" uid="uid://ckvgc1d6722r8" path="res://assets/spacegame_asset_pack/enemy_spaceship_spritesheet.png" id="2_eoqba"]
+[ext_resource type="Script" uid="uid://dbv8jlf6qnyf3" path="res://scripts/animationautoplay.gd" id="3_qncy5"]
+[ext_resource type="AudioStream" uid="uid://bxj37fxacqwgo" path="res://assets/sound/laserShoot.wav" id="4_eoqba"]
+[ext_resource type="Script" uid="uid://dkiyhta2sw12q" path="res://scripts/audioslowmotion.gd" id="5_qncy5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rp1m4"]
+atlas = ExtResource("2_eoqba")
+region = Rect2(96, 156, 32, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6uosh"]
+atlas = ExtResource("2_eoqba")
+region = Rect2(128, 156, 32, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohj20"]
+atlas = ExtResource("2_eoqba")
+region = Rect2(160, 156, 32, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_702vt"]
+atlas = ExtResource("2_eoqba")
+region = Rect2(192, 156, 32, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oc4vw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rp1m4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6uosh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohj20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_702vt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ox28"]
+size = Vector2(22, 10)
+
+[node name="bullet" type="Area2D"]
+script = ExtResource("1_l5glv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(21, 0)
+rotation = 1.5708
+scale = Vector2(3, 3.579)
+sprite_frames = SubResource("SpriteFrames_oc4vw")
+script = ExtResource("3_qncy5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(12, 0)
+shape = SubResource("RectangleShape2D_4ox28")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_eoqba")
+volume_db = -16.692
+autoplay = true
+bus = &"SFX"
+script = ExtResource("5_qncy5")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

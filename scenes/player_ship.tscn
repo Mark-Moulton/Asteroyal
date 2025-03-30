@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://cvryfi1rq7r1n"]
+
+[ext_resource type="Script" uid="uid://duv1l8j17tutq" path="res://scripts/player_ship.gd" id="1_sxv70"]
+[ext_resource type="PackedScene" uid="uid://g81c5i0g1sni" path="res://scenes/bullet.tscn" id="2_xpcit"]
+[ext_resource type="Texture2D" uid="uid://cci4wqbvoyxbq" path="res://assets/spacegame_asset_pack/player_spaceship_spritesheet.png" id="3_x65wr"]
+[ext_resource type="AudioStream" uid="uid://c7vqgmv2i6t5j" path="res://assets/sound/tone(1).wav" id="4_7ni5w"]
+[ext_resource type="Script" uid="uid://dkiyhta2sw12q" path="res://scripts/audioslowmotion.gd" id="5_7ni5w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcreo"]
+atlas = ExtResource("3_x65wr")
+region = Rect2(0, 40, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7r08"]
+atlas = ExtResource("3_x65wr")
+region = Rect2(32, 40, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pircr"]
+atlas = ExtResource("3_x65wr")
+region = Rect2(64, 40, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yii3e"]
+atlas = ExtResource("3_x65wr")
+region = Rect2(96, 40, 32, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mura2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcreo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7r08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pircr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yii3e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ys4te"]
+radius = 8.51469
+
+[node name="PlayerShip" type="RigidBody2D"]
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_sxv70")
+Bullet = ExtResource("2_xpcit")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_mura2")
+frame_progress = 0.0170321
+
+[node name="bulletspawn" type="Node2D" parent="."]
+position = Vector2(17.275, 0)
+
+[node name="CloseCall" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CloseCall"]
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_ys4te")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_7ni5w")
+volume_db = -3.889
+bus = &"ThrustSFX"
+script = ExtResource("5_7ni5w")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8, -14, -8, 14, 19, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="CloseCall" to="." method="_on_close_call_body_entered"]
+[connection signal="body_exited" from="CloseCall" to="." method="_on_close_call_body_exited"]

@@ -1,0 +1,148 @@
+[gd_scene load_steps=15 format=3 uid="uid://brdvj8fqmxa8d"]
+
+[ext_resource type="Script" uid="uid://2qwpvkmwylyi" path="res://scripts/gamescript.gd" id="1_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://cvryfi1rq7r1n" path="res://scenes/player_ship.tscn" id="2_gpws7"]
+[ext_resource type="Texture2D" uid="uid://ro5y5vx67kno" path="res://assets/SBS - Seamless Space Backgrounds - Large 1024x1024/Large 1024x1024/Purple Nebula/Purple_Nebula_01-1024x1024.png" id="3_dinhu"]
+[ext_resource type="Script" uid="uid://blp7gx4j0sr2j" path="res://scripts/camera.gd" id="4_0tnpc"]
+[ext_resource type="Script" uid="uid://cw4j478tah1jy" path="res://scripts/dangerflash.gd" id="5_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://bu41rureufkvc" path="res://scenes/score.tscn" id="5_p57ef"]
+[ext_resource type="AudioStream" uid="uid://u8qv3vpflti" path="res://assets/sound/BeepBox-Song(1).wav" id="6_gee14"]
+[ext_resource type="AudioStream" uid="uid://nv2u076w3ngj" path="res://assets/sound/asteroiddeath.wav" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://dkiyhta2sw12q" path="res://scripts/audioslowmotion.gd" id="7_vtaks"]
+[ext_resource type="AudioStream" uid="uid://dtgxj8wq8liba" path="res://assets/sound/playerdeath.wav" id="8_0tnpc"]
+[ext_resource type="Theme" uid="uid://beydxbelndhve" path="res://themes/buttonTheme.tres" id="12_dinhu"]
+[ext_resource type="PackedScene" uid="uid://2jt8f350ia0t" path="res://scenes/asteroidGiant.tscn" id="13_kvuet"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0tnpc"]
+font_size = 94
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kvuet"]
+font_size = 70
+font_color = Color(0.901961, 0.901961, 0.980392, 1)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_lbhrr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+position = Vector2(338, 112)
+scale = Vector2(3.74805, 3.42578)
+texture = ExtResource("3_dinhu")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_0tnpc")
+
+[node name="DangerLabel" type="Label" parent="Camera2D"]
+visible = false
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -265.0
+offset_top = -69.0
+offset_right = 277.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "!!DANGER!!"
+label_settings = SubResource("LabelSettings_0tnpc")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+script = ExtResource("5_kvpfn")
+
+[node name="PlayerShip" parent="." instance=ExtResource("2_gpws7")]
+rotation = -1.5708
+
+[node name="AudioStreamPlayerBGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_gee14")
+volume_db = -15.687
+autoplay = true
+bus = &"Music"
+script = ExtResource("7_vtaks")
+
+[node name="AudioStreamPlayerSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_u5sy4")
+volume_db = -26.145
+pitch_scale = 1.53
+script = ExtResource("7_vtaks")
+
+[node name="AudioStreamPlayerGiantSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_u5sy4")
+volume_db = -26.726
+script = ExtResource("7_vtaks")
+
+[node name="AudioStreamPlayerShipDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_0tnpc")
+volume_db = -23.821
+script = ExtResource("7_vtaks")
+
+[node name="Score" parent="." instance=ExtResource("5_p57ef")]
+anchors_preset = -1
+anchor_left = -0.5
+anchor_top = -0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -407.0
+offset_top = -177.0
+offset_right = 409.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "SCORE: 0"
+label_settings = SubResource("LabelSettings_kvuet")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("12_dinhu")
+text = "Restart"
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("12_dinhu")
+text = "Quit"
+
+[node name="AsteroidGiant" parent="." instance=ExtResource("13_kvuet")]
+position = Vector2(486, -207)
+
+[node name="AsteroidGiant2" parent="." instance=ExtResource("13_kvuet")]
+position = Vector2(-590, -284)
+
+[node name="AsteroidGiant3" parent="." instance=ExtResource("13_kvuet")]
+position = Vector2(-607, 230)
+
+[node name="AsteroidGiant4" parent="." instance=ExtResource("13_kvuet")]
+position = Vector2(466, 293)
+
+[connection signal="playDeathSFX" from="PlayerShip" to="." method="_on_player_ship_play_death_sfx"]
+[connection signal="scoringCloseCall" from="PlayerShip" to="." method="_on_player_ship_scoring_close_call"]
+[connection signal="scoringCloseCall" from="PlayerShip" to="Camera2D" method="_on_player_ship_scoring_close_call"]
+[connection signal="startCloseCall" from="PlayerShip" to="." method="_on_player_ship_start_close_call"]
+[connection signal="startCloseCall" from="PlayerShip" to="Camera2D" method="_on_player_ship_start_close_call"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]

@@ -1,0 +1,9 @@
+[gd_resource type="StyleBoxFlat" format=3 uid="uid://vtii770n52fk"]
+
+[resource]
+bg_color = Color(1, 0.639216, 0.690196, 1)
+skew = Vector2(0.2, 0)
+corner_radius_top_left = 32
+corner_radius_top_right = 16
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 16

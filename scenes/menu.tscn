@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://ch0ammhdewgw8"]
+
+[ext_resource type="Script" uid="uid://dr4ft0r01nl8v" path="res://scripts/mainmenu.gd" id="1_con2f"]
+[ext_resource type="Theme" uid="uid://beydxbelndhve" path="res://themes/buttonTheme.tres" id="1_yqeox"]
+[ext_resource type="PackedScene" uid="uid://brdvj8fqmxa8d" path="res://scenes/game.tscn" id="2_mhnvy"]
+[ext_resource type="Texture2D" uid="uid://c260hrt8um3f5" path="res://assets/SBS - Seamless Space Backgrounds - Large 1024x1024/Large 1024x1024/Purple Nebula/Purple_Nebula_03-1024x1024.png" id="2_vjb58"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_con2f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4h3mk"]
+font_size = 120
+font_color = Color(0.901961, 0.901961, 0.980392, 1)
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_con2f")
+gameScene = ExtResource("2_mhnvy")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+top_level = true
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_con2f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "ASTEROYAL"
+label_settings = SubResource("LabelSettings_4h3mk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_yqeox")
+text = "Start Game"
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_yqeox")
+text = "Quit Game"
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(937, 539)
+scale = Vector2(2.87793, 2.5376)
+texture = ExtResource("2_vjb58")
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]

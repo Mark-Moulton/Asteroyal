@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu41rureufkvc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pbkhe"]
+font_size = 25
+font_color = Color(0.901961, 0.901961, 0.980392, 1)
+
+[node name="Score" type="Control"]
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.499
+anchor_top = 0.00455556
+anchor_right = 0.499
+anchor_bottom = 1.001
+offset_left = -957.08
+offset_top = 0.0799999
+offset_right = 957.92
+offset_bottom = -0.0800781
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_pbkhe")
+horizontal_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
